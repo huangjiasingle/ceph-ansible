@@ -2,3 +2,8 @@
 # testinfra < 1.7.1 does not work Ansible 2.4, see https://github.com/philpep/testinfra/issues/249
 testinfra==1.7.1
 pytest-xdist
+<<<<<<< HEAD
+=======
+pytest==3.6.1
+notario>=0.0.13
+>>>>>>> d83b24d2... tests: fix broken test when collocated daemons scenarios
