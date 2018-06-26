@@ -8,6 +8,7 @@
   apt_repository:
     repo: "deb {{ ceph_rhcs_cdn_debian_repo }}{{ ceph_rhcs_cdn_debian_repo_version }}/MON {{ ceph_stable_distro_source | default(ansible_lsb.codename) }} main"
     state: present
+<<<<<<< HEAD
   changed_when: false
   when:
     - mon_group_name in group_names
@@ -27,3 +28,12 @@
   changed_when: false
   when:
     - (rgw_group_name in group_names or mds_group_name in group_names)
+=======
+    update_cache: no
+  register: add_debian_apt_repo
+  with_items:
+    - { repo: "MON", configure: (mon_group_name in group_names or mgr_group_name in group_names) }
+    - { repo: "OSD", configure: (osd_group_name in group_names) }
+    - { repo: "Tools", configure: (rgw_group_name in group_names or mds_group_name in group_names or nfs_group_name in group_names or iscsi_gw_group_name in group_names or client_group_name in group_names) }
+  when: item.configure
+>>>>>>> 1d454b61... Enable monitor repo for mgr nodes and Tools repo for iscsi/nfs/clients
